@@ -1,18 +1,15 @@
 {
-  "name": "handoff",
+  "name": "handoff-ai",
   "version": "0.1.0",
   "description": "AI collaboration framework for persistent project knowledge and smooth handoffs",
   "main": "index.js",
   "bin": {
-    "handoff": "./bin/handoff.js"
+    "handoff-ai": "./bin/handoff.js"
   },
   "scripts": {
-    "dev": "node tools/dev.js",
-    "build": "node tools/build.js",
-    "test": "jest",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "prepare": "npm run build"
+    "test": "echo \"No tests yet\" && exit 0",
+    "lint": "echo \"No linting configured yet\" && exit 0",
+    "format": "echo \"No formatting configured yet\" && exit 0"
   },
   "keywords": [
     "ai",
@@ -28,21 +25,21 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/karote00/handoff.git"
+    "url": "https://github.com/karote00/handoff-ai.git"
   },
   "bugs": {
-    "url": "https://github.com/karote00/handoff/issues"
+    "url": "https://github.com/karote00/handoff-ai/issues"
   },
-  "homepage": "https://github.com/karote00/handoff#readme",
+  "homepage": "https://github.com/karote00/handoff-ai#readme",
   "engines": {
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "commander": "^11.0.0",
-    "inquirer": "^9.0.0",
+    "commander": "^9.0.0",
+    "inquirer": "^8.0.0",
     "fs-extra": "^11.0.0",
-    "chalk": "^5.0.0",
-    "ora": "^7.0.0"
+    "chalk": "^4.0.0",
+    "ora": "^6.0.0"
   },
   "devDependencies": {
     "jest": "^29.0.0",

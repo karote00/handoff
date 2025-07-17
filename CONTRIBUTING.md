@@ -1,6 +1,6 @@
-# Contributing to Handoff
+# Contributing to Handoff AI
 
-Thank you for your interest in contributing to Handoff! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to Handoff AI! This document provides guidelines and information for contributors.
 
 ## How to Contribute
 
@@ -36,8 +36,8 @@ Thank you for your interest in contributing to Handoff! This document provides g
 ### Setup Steps
 ```bash
 # Clone your fork
-git clone https://github.com/your-username/handoff.git
-cd handoff
+git clone https://github.com/your-username/handoff-ai.git
+cd handoff-ai
 
 # Install dependencies
 npm install
