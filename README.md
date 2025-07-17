@@ -1,8 +1,8 @@
-# Handoff 🤝
+# Handoff AI 🤝
 
 **AI collaboration framework for persistent project knowledge and smooth handoffs**
 
-Handoff eliminates the need to re-explain your codebase to AI assistants every time. It creates a persistent knowledge base that enables consistent, intelligent AI collaboration across team members and sessions.
+Handoff AI eliminates the need to re-explain your codebase to AI assistants every time. It creates a persistent knowledge base that enables consistent, intelligent AI collaboration across team members and sessions.
 
 ## The Problem
 
@@ -15,7 +15,7 @@ Every time you work with an AI assistant on your codebase:
 
 ## The Solution
 
-Handoff creates a `.project` folder in your repository that serves as **institutional memory for AI collaboration**:
+Handoff AI creates a `.project` folder in your repository that serves as **institutional memory for AI collaboration**:
 
 ```
 your-project/
@@ -32,17 +32,17 @@ your-project/
 
 ## Quick Start
 
-### 1. Initialize Handoff in your project
+### 1. Initialize Handoff AI in your project
 
 ```bash
-npx handoff init
+npx handoff-ai init
 ```
 
 ### 2. Configure your preferences
 
 ```bash
 # Set your engagement level and expertise
-npx handoff config
+npx handoff-ai config
 ```
 
 ### 3. Work with any AI assistant
@@ -78,14 +78,14 @@ The AI will automatically understand your codebase, follow your architectural pa
 
 ## Real-World Example
 
-**Before Handoff:**
+**Before Handoff AI:**
 ```
 You: "Help me add user authentication"
 AI: "What framework are you using? What's your database? How do you handle state? What's your testing setup?"
 You: *explains everything again*
 ```
 
-**With Handoff:**
+**With Handoff AI:**
 ```
 You: "Help me add user authentication using medium-engagement mode"
 AI: "I see you're using React with TypeScript, PostgreSQL, and Jest. Based on your existing auth patterns, I'll implement JWT-based authentication following your established error handling and validation patterns. Here's the plan..."
@@ -93,7 +93,7 @@ AI: "I see you're using React with TypeScript, PostgreSQL, and Jest. Based on yo
 
 ## How It Works
 
-1. **Initialize**: Run `handoff init` to create the `.project` structure
+1. **Initialize**: Run `handoff-ai init` to create the `.project` structure
 2. **Configure**: Set your preferences for AI interaction style
 3. **Document**: AI analyzes your codebase and creates persistent knowledge
 4. **Collaborate**: Work with AI using structured workflows (EPICs)
@@ -103,10 +103,10 @@ AI: "I see you're using React with TypeScript, PostgreSQL, and Jest. Based on yo
 
 ```bash
 # Install globally
-npm install -g handoff-cli
+npm install -g handoff-ai
 
 # Or use directly
-npx handoff init
+npx handoff-ai init
 ```
 
 ## Manual Setup (No CLI)
@@ -152,8 +152,8 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ### Development Setup
 
 ```bash
-git clone https://github.com/karote00/handoff.git
-cd handoff
+git clone https://github.com/karote00/handoff-ai.git
+cd handoff-ai
 npm install
 npm run dev
 ```
@@ -161,7 +161,7 @@ npm run dev
 ## Roadmap
 
 - [x] Core framework and templates
-- [ ] CLI tool (`handoff init`, `handoff config`)
+- [x] CLI tool (`handoff-ai init`, `handoff-ai config`)
 - [ ] VS Code extension
 - [ ] GitHub integration
 - [ ] AI platform partnerships
