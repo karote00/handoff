@@ -111,6 +111,34 @@ You: "Use the codebase exploration EPIC to help me understand this legacy system
 AI: "I'll systematically analyze this codebase and create documentation. Starting with the overall architecture, then diving into specific components..."
 ```
 
+## New Features (v0.1.2)
+
+### 🧪 Smart Testing Guidelines
+Handoff now includes built-in testing guidelines that prevent common issues:
+
+```
+✅ AI will use: yarn test:ci, npm run test:run, yarn build
+❌ AI avoids: yarn test, npm start, yarn dev (these hang or need browser control)
+```
+
+**For browser testing**, AI is guided to use automated tools like Playwright or Cypress instead of trying to manually test in browsers.
+
+### 📝 Automatic Documentation Sync
+Every EPIC workflow now includes a final documentation sync phase that ensures:
+- Project documentation stays current with code changes
+- New patterns and decisions are preserved
+- Knowledge is ready for the next developer or AI session
+
+**Example Documentation Sync:**
+```
+AI: "I've completed the feature implementation. Now I'm updating the documentation:
+- ✅ Updated API docs for new endpoints
+- ✅ Added new component patterns to architecture docs  
+- ✅ Updated golden paths for the new user flow
+- ✅ Logged implementation decisions in assumptions
+Ready for PR review!"
+```
+
 ## Best Practices
 
 ### For Teams
@@ -118,18 +146,21 @@ AI: "I'll systematically analyze this codebase and create documentation. Startin
 - **Review assumptions regularly** to maintain consistency
 - **Update configurations** as project complexity changes
 - **Use Handoff for onboarding** new team members
+- **Leverage documentation sync** to keep knowledge current across feature branches
 
 ### For Solo Developers
 - **Start with medium-engagement** to find your preferred balance
 - **Use auto-pilot for routine tasks** to save time
 - **Switch to high-engagement for learning** new concepts
 - **Review assumptions periodically** to catch any misunderstandings
+- **Trust the documentation sync** to maintain project knowledge
 
 ### For AI Collaboration
 - **Be specific about engagement levels** when starting tasks
 - **Reference existing patterns** by mentioning similar implementations
 - **Ask AI to explain its reasoning** when decisions seem unclear
 - **Update your configuration** as you learn what works best
+- **Let AI handle testing commands** - it knows which ones to avoid
 
 ## Troubleshooting
 

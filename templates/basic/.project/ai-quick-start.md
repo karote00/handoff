@@ -15,6 +15,25 @@ This is the first file AI agents should read when starting work on this project.
 2. **Review Assumptions**: Check `.project/assumptions.md` for previous AI decisions
 3. **Understand Architecture**: Look for architecture documentation in your project
 
+## 🧪 Testing Guidelines
+
+**For Documentation/Analysis Tasks**:
+- ✅ Use CI commands: `yarn test:ci`, `npm run test:run`, `yarn lint:ci`
+- ❌ Avoid watch mode: `yarn test`, `npm test`, `yarn lint` (these start watch mode)
+- ❌ Avoid interactive apps: `yarn start`, `npm start`, `yarn dev` (AI can't control browser)
+
+**For Active Development**:
+- ✅ Watch mode is fine: `yarn test`, `yarn dev`, `npm run dev` (human can control)
+
+**Build Commands**:
+- ✅ Production builds: `yarn build`, `npm run build`
+- ✅ Clean builds: `yarn clean && yarn build`
+
+**Testing Interactive Features**:
+- ✅ Use automated tools: Playwright, Cypress, or similar for browser testing
+- ✅ Use API testing: curl, Postman scripts, or test frameworks for API endpoints
+- ❌ Avoid manual browser testing (AI cannot interact with browser UI)
+
 ## 🎯 Common Task Routing
 
 **"I want to implement a new feature"**

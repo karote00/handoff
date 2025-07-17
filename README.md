@@ -76,6 +76,16 @@ The AI will automatically understand your codebase, follow your architectural pa
 - **Feature Implementation**: Build new features following established patterns
 - **Codebase Exploration**: Understand unfamiliar codebases
 
+### 🧪 **Smart Testing Guidelines**
+- Prevents AI from using watch mode commands that hang processes
+- Guides AI to use CI-friendly commands for documentation tasks
+- Recommends automated testing tools for browser interactions
+
+### 📝 **Automatic Documentation Sync**
+- Ensures project documentation stays current with code changes
+- Built-in documentation update phase in all workflows
+- Preserves knowledge for future AI sessions and team handoffs
+
 ## Real-World Example
 
 **Before Handoff AI:**
