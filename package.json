@@ -1,10 +1,10 @@
 {
   "name": "handoff-ai",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AI collaboration framework for persistent project knowledge and smooth handoffs",
   "main": "index.js",
   "bin": {
-    "handoff-ai": "./bin/handoff.js"
+    "handoff-ai": "bin/handoff.js"
   },
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0",
@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/karote00/handoff-ai.git"
+    "url": "git+https://github.com/karote00/handoff-ai.git"
   },
   "bugs": {
     "url": "https://github.com/karote00/handoff-ai/issues"
@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "commander": "^9.0.0",
-    "inquirer": "^8.0.0",
-    "fs-extra": "^11.0.0",
-    "chalk": "^4.0.0",
-    "ora": "^6.0.0"
+    "inquirer": "^8.2.6",
+    "fs-extra": "^10.1.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1"
   },
   "devDependencies": {
     "jest": "^29.0.0",
