@@ -12,7 +12,7 @@ const program = new Command();
 program
     .name('handoff-ai')
     .description('AI collaboration framework for persistent project knowledge')
-    .version('0.1.0');
+    .version('0.1.2');
 
 program
     .command('init')
