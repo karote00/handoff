@@ -112,11 +112,12 @@ AI: "I see you're using React with TypeScript, PostgreSQL, and Jest. Based on yo
 ## Installation
 
 ```bash
-# Install globally
-npm install -g handoff-ai
+# Quick start (recommended)
+npx handoff-ai start
 
-# Or use directly
-npx handoff-ai init
+# Or install globally
+npm install -g handoff-ai
+handoff-ai start
 ```
 
 ## Manual Setup (No CLI)

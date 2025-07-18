@@ -14,8 +14,8 @@ Handoff is an AI collaboration framework that creates a persistent knowledge bas
 # Install globally
 npm install -g handoff
 
-# Or use directly with npx
-npx handoff init
+# Or use directly with npx (quick start)
+npx handoff-ai start
 ```
 
 ### 2. Initialize in Your Project
