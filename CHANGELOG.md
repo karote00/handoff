@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2025-01-18
+
+### Added
+- **Pattern Inconsistency Communication Protocol**: Added to all EPIC workflows
+  - AI now communicates pattern conflicts instead of silently choosing
+  - Focuses on implementation-area-only conflicts (not entire codebase)
+  - Provides clear options and examples for handling conflicts
+  - Improves user understanding of codebase inconsistencies
+- **Pattern Guidance in AI Quick Start**: Added pattern inconsistency guidance to ai-quick-start.md
+  - Clear instructions for AI on how to handle conflicting patterns
+  - Focus on implementation-relevant conflicts only
+  - Always communicate with users before making pattern decisions
+
+### Improved
+- **Better Production Workflow Compatibility**: More transparent AI collaboration
+- **Enhanced Knowledge Preservation**: Documentation sync ensures continuity
+- **Reduced User Frustration**: Clear communication about pattern conflicts
+- **More Practical for Real-World Development**: Works better with messy, inconsistent codebases
+
 ## [0.1.6] - 2025-01-18
 
 ### Added

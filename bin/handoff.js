@@ -12,7 +12,7 @@ const program = new Command();
 program
     .name('handoff-ai')
     .description('AI collaboration framework for persistent project knowledge')
-    .version('0.1.6');
+    .version('0.1.7');
 
 // Show start command prominently when no command is given
 if (process.argv.length === 2) {
@@ -26,22 +26,22 @@ program
     .description('Quick start guide for new users')
     .action(async () => {
         console.log(chalk.blue('🚀 Welcome to Handoff AI!\n'));
-        
+
         // Check if already initialized
         if (await fs.pathExists('.project')) {
             console.log(chalk.green('✅ Handoff AI is already set up in this project!\n'));
-            
+
             console.log(chalk.blue('Next steps:'));
             console.log('  1. Tell your AI assistant: "Check my .project folder and help me with [task]"');
             console.log('  2. Choose an engagement level:');
             console.log('     • high-engagement (collaborative)');
-            console.log('     • medium-engagement (guided)'); 
+            console.log('     • medium-engagement (guided)');
             console.log('     • auto-pilot (autonomous)');
             console.log('\n  3. Try these common tasks:');
             console.log('     • "Help me implement user authentication using medium-engagement mode"');
             console.log('     • "Use the codebase exploration EPIC to understand this project"');
             console.log('     • "Document this project using collaborative documentation EPIC"');
-            
+
             console.log(chalk.gray('\n💡 Run "handoff-ai config" to change your preferences'));
             return;
         }
@@ -65,22 +65,22 @@ program
 
         // Quick setup
         const spinner = ora('Setting up Handoff AI...').start();
-        
+
         try {
             const templatePath = path.join(__dirname, '..', 'templates', 'basic');
             await fs.copy(templatePath, '.');
             spinner.succeed('Handoff AI set up successfully! 🎉');
 
             console.log(chalk.green('\n🎯 You\'re ready to go!\n'));
-            
+
             console.log(chalk.blue('Tell your AI assistant:'));
             console.log(chalk.white('  "Check my .project folder and help me implement user authentication using medium-engagement mode"\n'));
-            
+
             console.log(chalk.blue('Available engagement levels:'));
             console.log('  • high-engagement - Collaborative, detailed discussions');
             console.log('  • medium-engagement - Guided with key approvals (recommended)');
             console.log('  • auto-pilot - Autonomous with assumption logging\n');
-            
+
             console.log(chalk.gray('💡 Run "handoff-ai config" to customize your preferences'));
             console.log(chalk.gray('💡 Run "handoff-ai status" to see what\'s available'));
 
