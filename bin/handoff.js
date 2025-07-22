@@ -8,12 +8,15 @@ const chalk = require('chalk');
 const ora = require('ora');
 const { injectDocs, applyDocumentationChanges, displayDryRunResults } = require('../lib/inject-docs');
 
+// Read version from package.json
+const packageJson = require('../package.json');
+
 const program = new Command();
 
 program
     .name('handoff-ai')
     .description('AI collaboration framework for persistent project knowledge')
-    .version('0.2.1');
+    .version(packageJson.version);
 
 // Show start command prominently when no command is given
 if (process.argv.length === 2) {
