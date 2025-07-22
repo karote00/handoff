@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.8] - 2025-01-18
+
+### Added
+- **🚀 inject-docs Command**: Revolutionary bidirectional documentation flow
+  - `handoff-ai inject-docs` - Injects Handoff documentation back into code as inline documentation
+  - **Multi-language support**: JavaScript/TypeScript (JSDoc), Python (docstrings), Java (Javadoc), and more
+  - **Smart detection**: Automatically detects functions, classes, and methods in source files
+  - **Contextual documentation**: Uses Handoff knowledge to generate relevant inline docs
+  - **Dry-run mode**: Preview changes before applying with `--dry-run` flag
+  - **File filtering**: Target specific files with `--files` pattern option
+  - **Language forcing**: Override detection with `--language` option
+
+### Features
+- **Bidirectional Documentation**: Complete the documentation cycle
+  - Forward: Code → Handoff docs (AI collaboration)
+  - Reverse: Handoff docs → Inline code documentation (inject-docs)
+- **Language-Agnostic**: Works with JavaScript, TypeScript, Python, Java, C#, Go, Rust, PHP, Ruby, C/C++
+- **Smart Integration**: Respects existing documentation, proper indentation, language-specific formats
+- **Production Ready**: Handles real-world codebases with robust file detection and processing
+
+### Technical Improvements
+- Added `glob` dependency for advanced file pattern matching
+- Enhanced CLI with comprehensive help and options
+- Robust error handling and user feedback
+- Efficient processing with dry-run capabilities
+
 ## [0.1.7] - 2025-01-18
 
 ### Added
