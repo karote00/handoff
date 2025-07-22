@@ -95,3 +95,6 @@ logs
 # Test outputs
 test-results/
 coverage/
+
+# Implementation guides (internal use only)
+handoff-ai-updates/
