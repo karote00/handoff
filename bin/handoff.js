@@ -13,7 +13,7 @@ const program = new Command();
 program
     .name('handoff-ai')
     .description('AI collaboration framework for persistent project knowledge')
-    .version('0.2.0');
+    .version('0.2.1');
 
 // Show start command prominently when no command is given
 if (process.argv.length === 2) {
