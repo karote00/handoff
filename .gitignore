@@ -98,3 +98,6 @@ coverage/
 
 # Implementation guides (internal use only)
 handoff-ai-updates/
+
+# Test project (for testing inject-docs feature)
+test-project/
