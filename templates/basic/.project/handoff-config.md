@@ -2,14 +2,73 @@
 
 This file defines how AI agents should interact with humans in this project. It serves as the default behavior that can be overridden per session.
 
-## Default Engagement Level
+## Collaboration Mode System
+
+**Current Setting**: `collaborate`
+
+### Available Collaboration Modes
+
+**collaborate** (Rich interaction)
+- AI asks clarifying questions before proceeding
+- Validates assumptions with human input
+- Documents all decisions and reasoning
+- Best for: Complex projects, critical decisions, learning scenarios
+
+**automatic** (Minimal interaction)
+- AI makes decisions independently
+- Documents what it did and why
+- Only asks for help when truly stuck
+- Best for: Simple tasks, greenfield projects, routine work
+
+**guided** (Structured decision-making)
+- AI presents options with pros/cons
+- Human chooses, AI executes
+- Educational explanations provided
+- Best for: Learning, team environments, knowledge transfer
+
+**review-only** (Batch feedback)
+- AI completes entire tasks
+- Presents final result for review
+- Human approves/rejects/requests changes
+- Best for: High-trust scenarios, experienced developers, time pressure
+
+### Mode Configuration
+
+```yaml
+# Default collaboration mode for all tasks
+default_collaboration_mode: collaborate
+
+# Mode overrides for specific EPICs
+epic_modes:
+  feature-implementation: collaborate
+  codebase-exploration: automatic
+  codebase-improvement: guided
+  collaborative-documentation: review-only
+  release-management: guided
+
+# Context-based preferences
+collaboration_preferences:
+  new_project: automatic
+  existing_project: collaborate
+  team_environment: guided
+  solo_development: automatic
+
+# AI capability trust level
+ai_trust_level: medium # low | medium | high
+
+# Dynamic mode switching
+allow_mode_switching: true
+smart_mode_suggestions: true
+```
+
+## Legacy Engagement Levels (Still Supported)
 
 **Current Setting**: `medium-engagement`
 
 Available options:
-- `high-engagement`: Collaborative, detailed human input required
-- `medium-engagement`: Guided, AI makes reasonable assumptions with human approval
-- `auto-pilot`: Autonomous, AI makes all decisions and documents assumptions
+- `high-engagement`: Maps to `collaborate` mode
+- `medium-engagement`: Maps to `guided` mode  
+- `auto-pilot`: Maps to `automatic` mode
 
 ## Project-Specific Preferences
 

@@ -11,7 +11,11 @@ This is the first file AI agents should read when starting work on this project.
 
 ## 📋 Before You Start
 
-1. **Check Engagement Level**: Read `.project/handoff-config.md` for interaction preferences
+1. **Check Collaboration Mode**: Read `.project/handoff-config.md` for interaction preferences
+   - `collaborate`: Ask questions, validate assumptions, rich interaction
+   - `automatic`: Work independently, document decisions
+   - `guided`: Present options, human chooses, AI executes
+   - `review-only`: Complete tasks, present for batch review
 2. **Review Assumptions**: Check `.project/assumptions.md` for previous AI decisions
 3. **Understand Architecture**: Look for architecture documentation in your project
 
@@ -59,22 +63,28 @@ This is the first file AI agents should read when starting work on this project.
 ## ⚡ Emergency Shortcuts
 
 **Human says "just figure it out"**:
-1. Set engagement level to `auto-pilot`
-2. Analyze codebase patterns
+1. Switch to `automatic` collaboration mode
+2. Analyze codebase patterns independently
 3. Document all assumptions in `.project/assumptions.md`
 4. Proceed with conservative choices
 
 **Human seems junior/uncertain**:
-1. Switch to `beginner` expertise level
-2. Provide multiple choice options
-3. Explain architectural concepts
-4. Use guided decision-making
+1. Switch to `guided` collaboration mode
+2. Present multiple choice options with explanations
+3. Explain architectural concepts clearly
+4. Use structured decision-making process
 
 **Human is in a hurry**:
-1. Use `medium-engagement` mode
-2. Focus on `key-decisions-only` reviews
+1. Use `review-only` collaboration mode
+2. Complete tasks efficiently and batch for review
 3. Make reasonable assumptions quickly
-4. Document decisions for later review
+4. Document decisions for later validation
+
+**Human wants to learn**:
+1. Use `collaborate` mode with educational focus
+2. Explain reasoning behind decisions
+3. Show alternative approaches and trade-offs
+4. Encourage questions and discussion
 
 ## 🔧 Key Files to Reference
 
