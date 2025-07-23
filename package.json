@@ -1,6 +1,6 @@
 {
   "name": "handoff-ai",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "AI collaboration framework for persistent project knowledge and smooth handoffs",
   "main": "index.js",
   "bin": {
@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "commander": "^9.0.0",
-    "fs-extra": "^10.1.0",
-    "glob": "^7.2.3",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.3",
     "inquirer": "^8.2.6",
     "ora": "^5.4.1"
   },
