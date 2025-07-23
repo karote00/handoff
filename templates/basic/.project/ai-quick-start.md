@@ -52,6 +52,10 @@ This is the first file AI agents should read when starting work on this project.
 → Use `.project/epics/codebase-improvement.md`
 → Focus on quality and maintainability
 
+**"I want to set up releases and deployments"**
+→ Use `.project/epics/release-management.md`
+→ Establish professional release workflows
+
 ## ⚡ Emergency Shortcuts
 
 **Human says "just figure it out"**:
