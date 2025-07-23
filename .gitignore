@@ -86,7 +86,6 @@ Thumbs.db
 # Build outputs
 dist/
 build/
-lib/
 
 # Logs
 logs
