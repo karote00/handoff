@@ -201,13 +201,15 @@ cp templates/basic/* .project/
 
 - [Getting Started Guide](docs/getting-started.md)
 - [Configuration Options](docs/configuration.md)
-- [Project Vision](docs/VISION.md)
-- [Development Collaboration Modes](docs/development/COLLABORATION_MODES.md)
+- [Available EPICs](docs/epics.md)
+- [Integration Examples](docs/examples.md)
+- [CLI Reference](docs/cli.md)
 
 ## Examples
 
 See real projects using Handoff:
 - [React TypeScript App](examples/react-app/)
+- [Node.js API](examples/node-api/)
 
 ## Templates
 
