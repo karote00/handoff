@@ -351,6 +351,199 @@ Create templates for common Handoff patterns in your IDE settings.
 - **Documentation:** What was added to the project knowledge base?
 ```
 
+## Claude GitHub Actions Integration
+
+### Enhanced Claude Review with Handoff AI Context
+
+Since Claude can read repository files (like `CLAUDE.md`), it can also read your `.project/` folder for comprehensive context:
+
+```yaml
+# .github/workflows/claude-handoff-review.yml
+name: Claude + Handoff AI Code Review
+on: [pull_request]
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Verify Handoff AI Setup
+        run: |
+          npx handoff-ai status
+          npx handoff-ai review --dry-run
+          
+      - name: Claude Review with Handoff Context
+        uses: anthropics/claude-github-action@v1
+        with:
+          claude-api-key: ${{ secrets.CLAUDE_API_KEY }}
+          prompt: |
+            Please review this PR using our comprehensive project context:
+            
+            ## Project Context (Read These Files First)
+            1. Read `.project/handoff-config.md` - Our AI collaboration preferences
+            2. Read `.project/assumptions.md` - All documented project decisions
+            3. Read `.project/review-rules.md` - Our custom review criteria
+            4. Read `.project/ai-quick-start.md` - Project overview and patterns
+            
+            ## Review Instructions
+            Based on the project context above, please:
+            1. **Architecture Compliance**: Check if changes align with documented architecture
+            2. **Pattern Consistency**: Ensure code follows established patterns from assumptions.md
+            3. **Custom Rules**: Apply criteria from review-rules.md
+            4. **Business Logic**: Validate against documented constraints and requirements
+            5. **Documentation Impact**: Identify if changes require doc updates
+            
+            ## Focus Areas
+            - Does this follow our documented error handling patterns?
+            - Are naming conventions consistent with project standards?
+            - Does the implementation respect our documented constraints?
+            - Are there any architectural violations?
+            
+            Provide specific, actionable feedback based on OUR project's documented decisions, not generic best practices.
+```
+
+### Handoff AI + Claude Integration Pattern
+
+```yaml
+# .github/workflows/enhanced-claude-review.yml
+name: Enhanced Claude Review
+on: [pull_request]
+
+jobs:
+  prepare-context:
+    runs-on: ubuntu-latest
+    outputs:
+      context-ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Prepare Handoff Context
+        id: check
+        run: |
+          echo "🔍 Preparing comprehensive project context for Claude..."
+          
+          # Verify Handoff AI setup
+          if npx handoff-ai status; then
+            echo "✅ Handoff AI configuration verified"
+            echo "ready=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Handoff AI not properly configured"
+            echo "ready=false" >> $GITHUB_OUTPUT
+          fi
+          
+          # Check documentation completeness
+          npx handoff-ai review --dry-run
+          
+  claude-review:
+    needs: prepare-context
+    if: needs.prepare-context.outputs.context-ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Context-Aware Claude Review
+        uses: anthropics/claude-github-action@v1
+        with:
+          claude-api-key: ${{ secrets.CLAUDE_API_KEY }}
+          prompt: |
+            # Context-Aware Code Review
+            
+            You are reviewing code for a project that uses Handoff AI for comprehensive project knowledge management.
+            
+            ## Step 1: Load Project Context
+            Please read these files to understand the project completely:
+            
+            **Core Configuration:**
+            - `.project/handoff-config.md` - Collaboration preferences and project setup
+            - `.project/ai-quick-start.md` - Project overview and key patterns
+            
+            **Project Knowledge:**
+            - `.project/assumptions.md` - All documented decisions and rationale
+            - `.project/review-rules.md` - Custom review criteria specific to this project
+            
+            **Workflow Guidance:**
+            - `.project/epics/` - Development workflow patterns (if exists)
+            
+            ## Step 2: Analyze PR Changes
+            Review the PR changes in the context of the project knowledge above.
+            
+            ## Step 3: Provide Context-Aware Feedback
+            
+            **Architecture Review:**
+            - Does this change align with documented architectural decisions?
+            - Are there any violations of documented constraints?
+            
+            **Pattern Compliance:**
+            - Does the code follow established patterns from assumptions.md?
+            - Is the implementation consistent with documented approaches?
+            
+            **Custom Criteria:**
+            - Apply any specific rules from review-rules.md
+            - Check against project-specific requirements
+            
+            **Documentation Impact:**
+            - Does this change require updates to project documentation?
+            - Should any new patterns be documented in assumptions.md?
+            
+            ## Step 4: Actionable Recommendations
+            Provide specific, actionable feedback that references our documented decisions rather than generic best practices.
+            
+            Format your response with:
+            - ✅ What aligns well with our documented patterns
+            - ⚠️ What needs attention based on our project rules
+            - 📝 What documentation updates might be needed
+            - 🚀 Suggestions for improvement within our architectural constraints
+```
+
+### Claude + Handoff AI Best Practices
+
+**1. Context Loading Pattern:**
+```yaml
+- name: Enhanced Context Loading
+  run: |
+    echo "📚 Claude Context Loading Instructions:"
+    echo ""
+    echo "Before reviewing code, please read our project context:"
+    echo "1. .project/handoff-config.md (collaboration preferences)"
+    echo "2. .project/assumptions.md (all project decisions)"
+    echo "3. .project/review-rules.md (custom review criteria)"
+    echo "4. .project/ai-quick-start.md (project overview)"
+    echo ""
+    echo "This context will help you provide project-specific feedback"
+    echo "rather than generic code review comments."
+```
+
+**2. Incremental Context Updates:**
+```yaml
+- name: Context Change Detection
+  run: |
+    if git diff --name-only origin/main | grep -q ".project/"; then
+      echo "🔄 Project context has changed!"
+      echo "Claude: Please pay special attention to updates in .project/ folder"
+      echo "These changes may affect how you should review this PR."
+    fi
+```
+
+**3. Multi-Stage Review:**
+```yaml
+- name: Multi-Stage Claude Review
+  run: |
+    echo "🎯 Multi-Stage Review Process:"
+    echo ""
+    echo "Stage 1 - Context Loading:"
+    echo "Read .project/ folder for complete project understanding"
+    echo ""
+    echo "Stage 2 - Change Analysis:"
+    echo "Analyze PR changes against loaded context"
+    echo ""
+    echo "Stage 3 - Pattern Validation:"
+    echo "Check compliance with documented patterns and rules"
+    echo ""
+    echo "Stage 4 - Feedback Generation:"
+    echo "Provide context-aware, actionable recommendations"
+```
+
 ## Advanced Integration Patterns
 
 ### Multi-Repository Projects

@@ -1,0 +1,30 @@
+# Test file to verify Claude's file reading capabilities in GitHub Actions
+# This is a test workflow - not for production use
+
+name: Test Claude File Access
+on: 
+  workflow_dispatch:  # Manual trigger for testing
+
+jobs:
+  test-claude-access:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Create Test Files
+        run: |
+          mkdir -p test-context
+          echo "This is a test file to check if Claude can read repository files" > test-context/test-file.md
+          echo "Project context: Node.js API with Express framework" > test-context/project-info.md
+          
+      - name: Test Claude File Reading
+        run: |
+          echo "🧪 Testing Claude's file reading capabilities:"
+          echo ""
+          echo "Claude, please help us test your file reading capabilities:"
+          echo "1. Can you read the file: test-context/test-file.md?"
+          echo "2. Can you read the file: test-context/project-info.md?"
+          echo "3. Can you read the .project/ folder if it exists?"
+          echo "4. What files can you see in this repository?"
+          echo ""
+          echo "Please respond with what you can and cannot access."
