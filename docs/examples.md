@@ -4,20 +4,66 @@ This guide shows how to integrate Handoff AI with different development workflow
 
 ## AI Assistant Integration
 
-### Claude (Anthropic)
+### Without AI Agents - Manual Review Process
 
-**Basic Integration:**
-```
-Hey Claude, I'm working on a React project. Please check my .project folder first, then help me implement user authentication using medium-engagement mode.
+**Using Handoff AI for Self-Review:**
+```bash
+# Check your project's review readiness
+handoff-ai review
+
+# Use the context for manual code review
+# Review your changes against:
+# - .project/assumptions.md (documented decisions)
+# - .project/review-rules.md (custom criteria)
+# - .project/review-guide.md (review process)
 ```
 
-**Advanced Integration:**
+**Manual Review Checklist:**
 ```
-Claude, please follow these steps:
-1. Read .project/handoff-config.md to understand my preferences
-2. Review .project/assumptions.md for previous decisions
-3. Use the Feature Implementation EPIC from .project/epics/
-4. Implement OAuth integration following our documented patterns
+Before committing changes, check:
+□ Does this follow patterns in .project/assumptions.md?
+□ Does this meet criteria in .project/review-rules.md?
+□ Are there any constraint violations?
+□ Should any new decisions be documented?
+```
+
+### With AI Agents - Collaborative Review
+
+#### Claude Integration
+
+**Step 1: Check for Existing Context**
+```
+Claude, please help me review this code. First, check if this project has context files:
+1. Look for CLAUDE.md (if exists, read it for project overview)
+2. Look for .project/ folder (if exists, read it for detailed project context)
+3. If neither exists, let me know so I can set up project context first
+```
+
+**Step 2: Collaborative Review (when context exists)**
+```
+Claude, please review my changes using our project context:
+
+1. Read CLAUDE.md (if exists) for project overview
+2. Read .project/ folder for comprehensive project knowledge:
+   - .project/assumptions.md (all documented decisions)
+   - .project/review-rules.md (custom review criteria)
+   - .project/review-guide.md (review process)
+   - .project/handoff-config.md (collaboration preferences)
+
+3. Review my changes against this context, focusing on:
+   - Consistency with documented patterns
+   - Compliance with custom rules
+   - Alignment with architectural decisions
+```
+
+**Step 3: Context Setup (if no context exists)**
+```
+I don't have project context set up yet. Let me initialize Handoff AI first:
+
+1. Run: npx handoff-ai init
+2. Run: npx handoff-ai config
+3. Document key project decisions in .project/assumptions.md
+4. Then we can do context-aware code review
 ```
 
 ### ChatGPT (OpenAI)
@@ -99,21 +145,71 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Verify Handoff AI Setup
-        run: npx handoff-ai status
-        
-      - name: Prepare AI Review Context
+      - name: Check Project Context
         run: |
-          echo "🤖 Context-Aware AI Review Instructions:"
+          echo "🔍 Checking available project context..."
+          
+          # Check for different context sources
+          if [ -f "CLAUDE.md" ]; then
+            echo "✅ CLAUDE.md found"
+            CLAUDE_EXISTS=true
+          else
+            echo "ℹ️  CLAUDE.md not found"
+            CLAUDE_EXISTS=false
+          fi
+          
+          if [ -d ".project" ]; then
+            echo "✅ Handoff AI context found"
+            npx handoff-ai status
+            HANDOFF_EXISTS=true
+          else
+            echo "ℹ️  Handoff AI not initialized"
+            HANDOFF_EXISTS=false
+          fi
+          
+          # Export for next step
+          echo "CLAUDE_EXISTS=$CLAUDE_EXISTS" >> $GITHUB_ENV
+          echo "HANDOFF_EXISTS=$HANDOFF_EXISTS" >> $GITHUB_ENV
+          
+      - name: AI Review Instructions
+        run: |
+          echo "🤖 AI Review Instructions:"
           echo ""
-          echo "Please review this PR using our project context:"
-          echo "1. Read .project/ folder for complete project understanding"
-          echo "2. Review .project/assumptions.md for documented decisions"
-          echo "3. Check .project/review-rules.md for custom criteria"
-          echo "4. Validate changes against documented patterns"
-          echo "5. Ensure architectural consistency"
+          
+          if [ "$HANDOFF_EXISTS" = "true" ] && [ "$CLAUDE_EXISTS" = "true" ]; then
+            echo "📚 Comprehensive Context Available:"
+            echo "1. Read CLAUDE.md for project overview"
+            echo "2. Read .project/ folder for detailed project context:"
+            echo "   - .project/assumptions.md (documented decisions)"
+            echo "   - .project/review-rules.md (custom criteria)"
+            echo "   - .project/review-guide.md (review process)"
+            echo "3. Review PR changes against both context sources"
+            
+          elif [ "$HANDOFF_EXISTS" = "true" ]; then
+            echo "📋 Handoff AI Context Available:"
+            echo "1. Read .project/ folder for project context:"
+            echo "   - .project/assumptions.md (documented decisions)"
+            echo "   - .project/review-rules.md (custom criteria)"
+            echo "   - .project/review-guide.md (review process)"
+            echo "2. Review PR changes against documented patterns"
+            
+          elif [ "$CLAUDE_EXISTS" = "true" ]; then
+            echo "📄 Basic Context Available:"
+            echo "1. Read CLAUDE.md for project overview"
+            echo "2. Review PR changes against general project context"
+            echo "💡 Consider setting up Handoff AI for more detailed context:"
+            echo "   npx handoff-ai init"
+            
+          else
+            echo "⚠️  No Project Context Found:"
+            echo "1. Review PR changes using general best practices"
+            echo "2. Consider setting up project context:"
+            echo "   - For Claude: Create CLAUDE.md with project overview"
+            echo "   - For comprehensive context: npx handoff-ai init"
+          fi
+          
           echo ""
-          echo "Focus areas based on changed files:"
+          echo "📁 Changed files in this PR:"
           git diff --name-only origin/main | head -10
 ```
 

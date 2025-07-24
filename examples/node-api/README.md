@@ -187,18 +187,59 @@ jobs:
         with:
           node-version: '18'
           
-      - name: Verify Handoff AI Setup
-        run: npx handoff-ai status
-        
-      - name: AI Code Review with Context
+      - name: Check Project Context
         run: |
-          echo "🤖 AI Review Instructions:"
-          echo "Please review this PR against our documented API patterns:"
-          echo "1. Read .project/ folder for complete project context"
-          echo "2. Check authentication patterns from .project/assumptions.md"
-          echo "3. Validate error handling consistency"
-          echo "4. Ensure database access follows repository pattern"
-          echo "5. Verify API response format compliance"
+          echo "🔍 Checking available project context..."
+          
+          if [ -f "CLAUDE.md" ]; then
+            echo "✅ CLAUDE.md found"
+            CLAUDE_EXISTS=true
+          else
+            echo "ℹ️  CLAUDE.md not found"
+            CLAUDE_EXISTS=false
+          fi
+          
+          if [ -d ".project" ]; then
+            echo "✅ Handoff AI context found"
+            npx handoff-ai status
+            HANDOFF_EXISTS=true
+          else
+            echo "ℹ️  Handoff AI not initialized"
+            HANDOFF_EXISTS=false
+          fi
+          
+          echo "CLAUDE_EXISTS=$CLAUDE_EXISTS" >> $GITHUB_ENV
+          echo "HANDOFF_EXISTS=$HANDOFF_EXISTS" >> $GITHUB_ENV
+          
+      - name: AI Review Instructions
+        run: |
+          echo "🤖 AI Review Instructions for Node.js API:"
+          echo ""
+          
+          if [ "$HANDOFF_EXISTS" = "true" ] && [ "$CLAUDE_EXISTS" = "true" ]; then
+            echo "📚 Comprehensive Context Available:"
+            echo "1. Read CLAUDE.md for project overview"
+            echo "2. Read .project/ folder for detailed API context:"
+            echo "   - .project/assumptions.md (API design decisions)"
+            echo "   - .project/review-rules.md (API-specific criteria)"
+            echo "   - Authentication patterns and error handling"
+            echo "3. Review PR changes against both context sources"
+            
+          elif [ "$HANDOFF_EXISTS" = "true" ]; then
+            echo "📋 Handoff AI Context Available:"
+            echo "1. Read .project/assumptions.md for API design decisions"
+            echo "2. Check authentication patterns and error handling"
+            echo "3. Validate database access patterns (repository layer)"
+            echo "4. Ensure API response format compliance"
+            echo "5. Review against documented constraints"
+            
+          else
+            echo "⚠️  No Project Context Found:"
+            echo "1. Review using general API best practices"
+            echo "2. Consider setting up Handoff AI for API-specific context:"
+            echo "   npx handoff-ai init --template full"
+            echo "3. Document API patterns in .project/assumptions.md"
+          fi
 ```
 
 ### Documentation Sync Check
