@@ -11,6 +11,7 @@ const { statusCommand } = require('../lib/commands/status');
 const { templatesCommand } = require('../lib/commands/templates');
 const { injectDocsCommand } = require('../lib/commands/inject-docs');
 const { modeCommand } = require('../lib/commands/mode');
+const { reviewCommand } = require('../lib/commands/review');
 
 // Read version from package.json
 const packageJson = require('../package.json');
@@ -71,5 +72,12 @@ program
     .option('-s, --set <mode>', 'Set collaboration mode (collaborate|automatic|guided|review-only)')
     .option('-l, --list', 'List available collaboration modes')
     .action(modeCommand);
+
+program
+    .command('review')
+    .description('Check documentation completeness and prepare for context-aware code review')
+    .option('-d, --dry-run', 'Show available context without performing review')
+    .option('-v, --verbose', 'Show detailed context information')
+    .action(reviewCommand);
 
 program.parse();
