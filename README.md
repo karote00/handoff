@@ -210,6 +210,8 @@ cp templates/basic/* .project/
 See real projects using Handoff:
 - [React TypeScript App](examples/react-app/)
 - [Node.js API](examples/node-api/)
+- [Python ML Project](examples/python-ml/)
+- [Monorepo Project](examples/monorepo/)
 
 ## Templates
 
