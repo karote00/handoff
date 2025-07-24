@@ -82,41 +82,156 @@ fi
 
 ### CI/CD Integration
 
-**GitHub Actions Example:**
+**Context-Aware Code Review:**
 ```yaml
-name: Handoff AI Documentation Check
+# .github/workflows/ai-review.yml
+name: AI-Assisted Code Review
 on: [pull_request]
 
 jobs:
-  doc-check:
+  ai-review:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Check Handoff AI Setup
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Verify Handoff AI Setup
+        run: npx handoff-ai status
+        
+      - name: Prepare AI Review Context
+        run: |
+          echo "🤖 Context-Aware AI Review Instructions:"
+          echo ""
+          echo "Please review this PR using our project context:"
+          echo "1. Read .project/ folder for complete project understanding"
+          echo "2. Review .project/assumptions.md for documented decisions"
+          echo "3. Check .project/review-rules.md for custom criteria"
+          echo "4. Validate changes against documented patterns"
+          echo "5. Ensure architectural consistency"
+          echo ""
+          echo "Focus areas based on changed files:"
+          git diff --name-only origin/main | head -10
+```
+
+**Documentation Sync Automation:**
+```yaml
+# .github/workflows/docs-sync.yml
+name: Documentation Sync
+on: [pull_request]
+
+jobs:
+  docs-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check Documentation Sync
+        run: |
+          npx handoff-ai inject-docs --dry-run
+          if [ $? -ne 0 ]; then
+            echo "❌ Documentation out of sync with code"
+            echo "Run: npx handoff-ai inject-docs"
+            exit 1
+          fi
+          echo "✅ Documentation is in sync"
+          
+      - name: Auto-Update Documentation
+        run: |
+          npx handoff-ai inject-docs
+          if [[ `git status --porcelain` ]]; then
+            echo "📝 Documentation updated automatically"
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add .
+            git commit -m "docs: Auto-update inline documentation"
+            git push
+          fi
+```
+
+**Project Health Monitoring:**
+```yaml
+# .github/workflows/project-health.yml
+name: Weekly Project Health Check
+on: 
+  schedule:
+    - cron: '0 9 * * 1'  # Weekly on Monday
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Handoff AI Health Analysis
+        run: |
+          echo "🏥 Weekly Project Health Check"
+          echo "================================"
+          npx handoff-ai status
+          npx handoff-ai review --dry-run
+          
+      - name: Generate AI Health Report
+        run: |
+          echo "📊 AI Health Analysis Instructions:"
+          echo ""
+          echo "Please analyze our project health by:"
+          echo "1. Reading .project/assumptions.md for recent decisions"
+          echo "2. Checking if documented patterns are still being followed"
+          echo "3. Identifying any architectural drift in recent commits"
+          echo "4. Reviewing project evolution against original constraints"
+          echo "5. Suggesting documentation updates or pattern improvements"
+          echo "6. Recommending areas for technical debt reduction"
+          echo ""
+          echo "Recent activity summary:"
+          git log --oneline --since="1 week ago" | head -10
+```
+
+**Multi-Environment Validation:**
+```yaml
+# .github/workflows/handoff-validation.yml
+name: Handoff AI Validation
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20]
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Validate Handoff AI Setup
         run: |
           if [ ! -d ".project" ]; then
             echo "❌ Handoff AI not initialized"
             exit 1
           fi
+          
           echo "✅ Handoff AI configuration found"
-      
-      - name: Validate Documentation
-        run: |
-          # Add validation logic for your documentation
           npx handoff-ai status
-```
-
-**Documentation Sync Check:**
-```yaml
-      - name: Check Documentation Sync
+          
+      - name: Validate Documentation Structure
         run: |
-          # Ensure inline docs are up to date
-          npx handoff-ai inject-docs --dry-run
-          if [ $? -ne 0 ]; then
-            echo "❌ Documentation out of sync"
-            echo "Run: npx handoff-ai inject-docs"
-            exit 1
-          fi
+          # Check required files exist
+          required_files=(".project/handoff-config.md" ".project/assumptions.md" ".project/ai-quick-start.md")
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Required file missing: $file"
+              exit 1
+            fi
+          done
+          echo "✅ All required documentation files present"
 ```
 
 ## IDE Integration

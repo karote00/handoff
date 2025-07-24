@@ -168,6 +168,106 @@ npm run type-check        # TypeScript validation
 npm run security-audit    # Security vulnerability check
 ```
 
+## GitHub Actions Integration
+
+### Context-Aware Code Review
+```yaml
+# .github/workflows/ai-review.yml
+name: AI-Assisted Code Review
+on: [pull_request]
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Verify Handoff AI Setup
+        run: npx handoff-ai status
+        
+      - name: AI Code Review with Context
+        run: |
+          echo "🤖 AI Review Instructions:"
+          echo "Please review this PR against our documented API patterns:"
+          echo "1. Read .project/ folder for complete project context"
+          echo "2. Check authentication patterns from .project/assumptions.md"
+          echo "3. Validate error handling consistency"
+          echo "4. Ensure database access follows repository pattern"
+          echo "5. Verify API response format compliance"
+```
+
+### Documentation Sync Check
+```yaml
+# .github/workflows/docs-sync.yml  
+name: Documentation Sync
+on: [pull_request]
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check Documentation Sync
+        run: |
+          npx handoff-ai inject-docs --dry-run
+          if [ $? -ne 0 ]; then
+            echo "❌ Documentation out of sync with code"
+            echo "Run: npx handoff-ai inject-docs"
+            exit 1
+          fi
+          echo "✅ Documentation is in sync"
+          
+      - name: Auto-Update Documentation
+        run: |
+          npx handoff-ai inject-docs
+          if [[ `git status --porcelain` ]]; then
+            echo "📝 Documentation updated automatically"
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add .
+            git commit -m "docs: Auto-update inline documentation"
+            git push
+          fi
+```
+
+### Project Health Check
+```yaml
+# .github/workflows/project-health.yml
+name: Weekly Project Health
+on: 
+  schedule:
+    - cron: '0 9 * * 1'  # Weekly on Monday
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Handoff AI Health Check
+        run: |
+          echo "🏥 Weekly Project Health Analysis"
+          npx handoff-ai status
+          npx handoff-ai review --dry-run
+          
+      - name: Generate AI Health Report
+        run: |
+          echo "📊 AI Analysis Prompt:"
+          echo "Please analyze our API project health by:"
+          echo "1. Reading .project/assumptions.md for recent decisions"
+          echo "2. Checking if documented patterns are still followed"
+          echo "3. Identifying any architectural drift in recent commits"
+          echo "4. Suggesting improvements based on project evolution"
+          echo "5. Recommending documentation updates if needed"
+```
+
 ## Key Learnings
 
 1. **API Context Matters:** Documenting authentication, error handling, and data access patterns helps AI generate consistent code
