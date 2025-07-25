@@ -17,25 +17,33 @@ Follow these steps for new features, bug fixes, or significant changes:
 - ✅ Ensure any CLI tools read version dynamically
 - ✅ Create git tag matching the version
 
-### 3. Release Documentation
+### 3. Documentation Updates
+- ✅ Update README.md with new features and usage examples
+- ✅ Update relevant documentation files for new functionality
+- ✅ Ensure all examples reflect the new features
+- ✅ Update integration guides and API documentation
+
+### 4. Release Documentation
 - ✅ Write comprehensive release notes in a markdown file
 - ✅ Include: features added, improvements, technical details, installation instructions
 - ✅ Use the markdown file for GitHub release (avoid shell interpretation issues)
 
-### 4. Package Publication (if applicable)
+### 5. Package Publication (if applicable)
 - ✅ Run `npm publish` or equivalent for your platform
 - ✅ Verify package is published successfully
 
-### 5. Testing
-- ✅ Test the published package works correctly
-- ✅ Verify all new features function as expected
+### 6. Post-Publication Testing
+- ✅ Test the published package works correctly (use latest, not specific version)
+- ✅ Verify all new features function as expected in clean environment
 - ✅ Test installation and basic functionality
+- ✅ Test full workflows with new features (not just command execution)
+- ✅ Test in multiple environments if applicable
 
-### 6. Repository Release
+### 7. Repository Release
 - ✅ If testing passes: Create repository release using the markdown file
 - ✅ If testing fails: Fix issues and return to step 1
 
-### 7. Final Verification
+### 8. Final Verification & Cleanup
 - ✅ Confirm repository has all updates
 - ✅ Confirm release notes are correct
 - ✅ Confirm package works (if applicable)
@@ -112,7 +120,8 @@ git tag -a v0.x.x -m "Release v0.x.x: Description"
 git push origin main --tags
 
 # Test published package (npm example)
-npx your-package@0.x.x --version
+npx your-package --version  # Test latest published version
+npx your-package@0.x.x --version  # Only for testing specific versions
 
 # GitHub release with file
 gh release create v0.x.x --title "Title" --notes-file release-notes.md
