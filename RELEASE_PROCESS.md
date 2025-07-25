@@ -17,28 +17,37 @@ Follow these steps **ONLY** for new features (not for README-only updates):
 - ✅ Ensure CLI version reads dynamically from `package.json`
 - ✅ Create git tag matching the version
 
-### 3. Release Documentation
+### 3. Documentation Updates
+- ✅ Update README.md with new features and usage examples
+- ✅ Update docs/examples.md with new integration patterns
+- ✅ Update relevant documentation files for new functionality
+- ✅ Ensure all examples reflect the new features
+
+### 4. Release Documentation
 - ✅ Write comprehensive release notes in a markdown file
 - ✅ Include: features added, improvements, technical details, installation instructions
 - ✅ Use the markdown file for GitHub release (avoid shell interpretation issues)
 
-### 4. NPM Publication
+### 5. NPM Publication
 - ✅ Run `npm publish`
 - ✅ Verify package is published successfully
 
-### 5. Testing
+### 6. Post-Publication Testing
 - ✅ Test the published package with `npx handoff-ai@x.x.x --version`
-- ✅ Test all new features work correctly
+- ✅ Test all new features work correctly in clean environment
 - ✅ Verify CLI commands and help text
+- ✅ Test full workflows with new features (not just command execution)
+- ✅ Test in multiple environments (terminal, simulated IDE usage)
 
-### 6. GitHub Release
+### 7. GitHub Release
 - ✅ If testing passes: Create GitHub release using the markdown file
 - ✅ If testing fails: Fix issues and return to step 1
 
-### 7. Final Verification
+### 8. Final Verification & Cleanup
 - ✅ Confirm GitHub has all updates
 - ✅ Confirm release notes are correct
-- ✅ Confirm NPM package works
+- ✅ Confirm NPM package works in real scenarios
+- ✅ Remove release notes file after successful GitHub release
 - ✅ **NOTIFY TEAM**: Release is complete
 
 ## 📝 README-Only Updates

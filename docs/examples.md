@@ -2,6 +2,32 @@
 
 This guide shows how to integrate Handoff AI with different development workflows, tools, and AI assistants.
 
+## Universal AI Collaboration Setup
+
+### New: Enhanced Start Script (v0.5.0+)
+
+The easiest way to set up AI collaboration is using the universal start script:
+
+```bash
+npx handoff-ai start
+```
+
+Then ask any AI assistant:
+```
+"Please run handoff-ai start and follow the instructions"
+```
+
+**What happens:**
+1. AI reads structured setup instructions
+2. AI discovers existing context (CLAUDE.md, .cursorrules, etc.)
+3. AI guides you through comprehensive documentation setup
+4. AI collaborates with you to capture detailed project knowledge
+
+**Works in any environment:**
+- **Terminal**: Copy instructions to your AI
+- **IDE**: Ask AI to run the command and follow output
+- **CLI Tools**: AI executes and follows structured workflow
+
 ## AI Assistant Integration
 
 ### Without AI Agents - Manual Review Process

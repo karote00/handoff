@@ -32,20 +32,27 @@ your-project/
 
 ## Quick Start
 
-### 1. Initialize Handoff AI in your project
+### 1. Universal AI Collaboration Setup
 
 ```bash
-npx handoff-ai init
+npx handoff-ai start
 ```
 
-### 2. Configure your preferences
+Then ask any AI assistant:
+```
+"Please run handoff-ai start and follow the instructions"
+```
+
+Your AI will guide you through setting up comprehensive project documentation for intelligent collaboration.
+
+### 2. Traditional Setup (Alternative)
 
 ```bash
-# Set your engagement level and expertise
-npx handoff-ai config
+npx handoff-ai init    # Initialize project documentation
+npx handoff-ai config  # Configure your preferences
 ```
 
-### 3. Work with any AI assistant
+### 3. Enhanced AI Collaboration
 
 ```
 "Hey Claude, check my .project folder and help me implement user authentication using medium-engagement mode"
